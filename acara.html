@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Detail Acara — Jamal & Nurmia</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-blue">
+<nav class="nav">
+<a href="index.html" class="logo">J & N</a>
+<div class="nav-links">
+<a href="index.html">Beranda</a>
+<a href="lokasi.html">Lokasi</a>
+<a href="ucapan.html">Ucapan</a>
+</div>
+</nav>
+
+
+<main class="container">
+<section class="detail-card">
+<h2>Detail Acara</h2>
+<p><strong>Tanggal:</strong> 09 November 2028</p>
+<p><strong>Waktu:</strong> 10:00 WITA</p>
+<p><strong>Tempat:</strong> Gedung Mutiara, Makassar</p>
+
+
+<div class="countdown" id="countdown">
+<div><span id="days">--</span><small>Hari</small></div>
+<div><span id="hours">--</span><small>Jam</small></div>
+<div><span id="minutes">--</span><small>Menit</small></div>
+<div><span id="seconds">--</span><small>Detik</small></div>
+</div>
+
+
+</section>
+</main>
+
+
+<footer class="foot">
+<p>© Jamal &amp; Nurmia — 2028</p>
+</footer>
+
+
+<script>
+// Countdown to 2028-11-09 10:00 local
+function countdown(){
+const target = new Date('2028-11-09T10:00:00');
+const now = new Date();
+const diff = target - now;
+if(diff<=0){ document.getElementById('countdown').innerHTML = '<p>Telah berlangsung</p>'; return; }
+const days = Math.floor(diff / (1000*60*60*24));
+const hours = Math.floor((diff / (1000*60*60)) % 24);
+const minutes = Math.floor((diff / (1000*60)) % 60);
+const seconds = Math.floor((diff / 1000) % 60);
+document.getElementById('days').textContent = days;
+document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+}
+setInterval(countdown,1000);
+countdown();
+</script>
+</body>
+</html>

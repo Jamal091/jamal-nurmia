@@ -1,0 +1,67 @@
+<!doctype html>
+</div>
+</nav>
+
+
+<main class="container">
+<section class="guest-card">
+<h2>Tulis Ucapan</h2>
+<form id="wishForm">
+<input type="text" id="gName" placeholder="Nama" required>
+<textarea id="gMsg" placeholder="Ucapan singkat..." required></textarea>
+<div class="form-row">
+<label><input type="radio" name="attend" value="Hadir" checked> Hadir</label>
+<label><input type="radio" name="attend" value="Tidak Hadir"> Tidak Hadir</label>
+</div>
+<button type="submit" class="btn">Kirim Ucapan</button>
+</form>
+
+
+<h3>Daftar Ucapan</h3>
+<div id="wishes"></div>
+</section>
+</main>
+
+
+<footer class="foot">
+<p>© Jamal &amp; Nurmia — 2028</p>
+</footer>
+
+
+<script>
+const form = document.getElementById('wishForm');
+const wishes = document.getElementById('wishes');
+
+
+function loadWishes(){
+const arr = JSON.parse(localStorage.getItem('wishes')||'[]');
+wishes.innerHTML = '';
+arr.reverse().forEach(w=>{
+const el = document.createElement('div'); el.className='wish';
+el.innerHTML = `<strong>${escapeHtml(w.name)}</strong> <small>(${escapeHtml(w.attend)})</small><p>${escapeHtml(w.msg)}</p>`;
+wishes.appendChild(el);
+});
+}
+
+
+function escapeHtml(str){ return str.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+
+form.addEventListener('submit', e=>{
+e.preventDefault();
+const name = document.getElementById('gName').value.trim();
+const msg = document.getElementById('gMsg').value.trim();
+const attend = document.querySelector('input[name="attend"]:checked').value;
+if(!name||!msg) return alert('Isi nama dan ucapan.');
+const arr = JSON.parse(localStorage.getItem('wishes')||'[]');
+arr.push({name, msg, attend, time: Date.now()});
+localStorage.setItem('wishes', JSON.stringify(arr));
+form.reset();
+loadWishes();
+});
+
+
+loadWishes();
+</script>
+</body>
+</html>
